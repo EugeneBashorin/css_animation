@@ -1,0 +1,198 @@
+/*@keyframes name{
+					 animation-duration: 5s/5000ms/initial/inherit;
+					 animation-timing-function: easy/linear/easy-in/easy-out/easy-in-out/cubic-bezier(x1, y1, x2, y2)/step-start/step-end/steps(количество шагов,start|end)/initial/inherit;изменение скорости анимации
+					 animation-delay: 5s/2000ms/0/initial/inherit;задержка
+					 animation-iteration-count: 1/infinite/initial/inherit; repeat
+					 animation-direction: alternate/alternate-reverse/normal/reverse/initial/inherit;
+}*/
+/*short form
+animation: animation-name animation-duration animation-timing-function animation-delay animation-iteration-count animation-direction;*/
+
+/*Проигрывание анимации animation-play-state
+div:hover {animation-play-state: paused/running/initial/inherit;}*/
+
+/*Состояние элемента до и после воспроизведения анимации animation-fill-mode
+div {animation-fill-mode: none/forwards/backwards/both/initial/inherit;}*/
+
+/*Множественные анимации
+несколько анимаций, перечисл через запятую:
+div{animation: shadow,... 1s ease-in-out 0.5s alternate, move 5s linear 2s;}*/
+
+/*div{animation-name:name/none/initial/inherit;}*/
+
+/* 1 */
+/* *{box-sizing:border-box} */
+/* container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+} */
+section {
+	box-sizing:border-box;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+  }
+@keyframes loader {
+	0%{transform: rotate(-45deg)}
+	50%{transform: rotate(-135deg)}
+	100%{transform: rotate(-225deg);}
+}
+@keyframes span-1 {
+	0%{transform: translate(0)}
+	50%{transform: translate(-50px,0); border-color:#EE4D68}
+	100%{transform: translate(0);}
+}
+@keyframes span-2 {
+	0%{transform: translate(0)}
+	50%{transform: translate(50px,0); border-color:#875678}
+	100%{transform: translate(0);}
+}
+@keyframes span-3 {
+	0%{transform: translate(0)}
+	50%{transform: translate(0,-50px); border-color:#FF9900}
+	100%{transform: translate(0);}
+}
+@keyframes span-4 {
+	0%{transform: translate(0)}
+	50%{transform: translate(0,50px); border-color:#00E4F6}
+	100%{transform: translate(0);}
+}
+.loader {
+	width: 50px;
+	height: 50px;
+	position: relative;
+	animation: loader 2s infinite ease-in-out;
+  }
+.loader span{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border: 4px solid #0B1B48;	
+}
+.loader span:nth-child(1){
+	animation: span-1 2s ease-in-out infinite;
+}
+.loader span:nth-child(2){
+	animation: span-2 2s ease-in-out infinite;
+}
+.loader span:nth-child(3){
+	animation: span-3 2s ease-in-out infinite;
+}
+.loader span:nth-child(4){
+	animation: span-4 2s ease-in-out infinite;
+}
+
+/* 2 */
+.second{
+	text-align: center;
+	font: 12px/1 monospace;
+	background: #F0EFEE;
+	color: #777;
+}
+.second div{
+	display: inline-block;
+	position: relative;
+	margin: 20px 16px 20px 20px;
+	width: 150px;
+	height: 150px;
+	background: white;
+	box-shadow: 0 0 0 5px rgba(0,0,0,.1);
+	transition: .2s;
+}
+.second div::after{
+	content: attr(class);
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	padding: 0 6px;
+}
+i{
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	left: 0;
+	bottom: 0;
+	border-radius: 50%;
+	background: #F6AC31;
+	animation: move 2s infinite;
+}
+@keyframes move{
+	from{
+		left: 0;
+		bottom: 0;
+	}
+	to{
+		left: 145px;
+		bottom: 145px;
+	}
+}
+.linear i{
+	animation-timing-function: linear;
+}
+.easy i{
+	animation-timing-function: ease;
+}
+.easy-in-out i{
+	animation-timing-function: ease-in-out;
+}
+.easy-in{
+	animation-timing-function: ease-in;
+}
+.easy-out i{
+	animation-timing-function: ease-out;
+}
+.cubic-bezier-1 i{animation-timing-function: cubic-bezier(.8, 1.5, .2, -1);}
+.cubic-bezier-1::after{content:"cubic-bezier(.8, 1.5, .2, -1)"}
+.cubic-bezier-2 i{animation-timing-function: cubic-bezier(.47,-.44,.49,1.46)}
+.cubic-bezier-2::after{content:"cubic-bezier(.47,-.44,.49,1.46)"}
+.cubic-bezier-3 i{animation-timing-function: cubic-bezier(1,0,0,.5)} 
+.cubic-bezier-3::after{content:"cubic-bezier(1,0,0,.5)"}
+.cubic-bezier-4 i{animation-timing-function: cubic-bezier(.1,.7,1,.1)}
+.cubic-bezier-4::after{content:"cubic-bezier(.1,.7,1,.1)"}
+.steps i{animation-timing-function: steps(10,end)}
+.steps::after{content:"steps(10,end)"}
+i:nth-child(2){animation-delay: .1s;}
+i:nth-child(3){animation-delay: .2s;}
+i:nth-child(4){animation-delay: .3s;}
+i:nth-child(5){animation-delay: .4s;}
+i:nth-child(6){animation-delay: .5s;}
+i:nth-child(7){animation-delay: .6s;}
+i:nth-child(8){animation-delay: .7s;}
+i:nth-child(9){animation-delay: .8s;}
+i:nth-child(10){animation-delay: .9s;}
+
+/* 3 */
+.percent-loader_section{
+	margin: 0;
+	background: #E6E2D6;
+}
+.loader-container{
+	position: absolute;
+	/* top: calc(50% - 65px); */
+	left: calc(50% - 65px);
+	width: 100px;
+	height: 100px;
+	background: #BDE2E0;
+	border-radius: 50%;
+	border: 15px solid #D7695A;
+	box-shadow: inset 0 0 15px rgba(0,0,0,.5);
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 100px;
+	overflow: hidden;	
+}
+@keyframes load{
+	100%{
+		transform: translateY(-1100px);
+	}
+}
+.percent-loader{
+	animation: load 11s steps(11,end) infinite;
+}
